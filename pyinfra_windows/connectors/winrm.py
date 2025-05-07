@@ -155,6 +155,7 @@ class WinRMConnector(BaseConnector):
                 transport=kwargs["winrm_transport"],
                 read_timeout_sec=kwargs["winrm_read_timeout_sec"],
                 operation_timeout_sec=kwargs["winrm_operation_timeout_sec"],
+                server_cert_validation=kwargs["winrm_server_cert_validation"],
             )
             self.session = session
             return session
