@@ -9,10 +9,14 @@ from .util import make_inventory
 
 class TestWinrmConnector(TestCase):
     def setUp(self):
-        self.fake_connect_patch = patch("pyinfra_windows.connectors.winrm.WinRMConnector.connect")
+        self.fake_connect_patch = patch(
+            "pyinfra_windows.connectors.winrm.WinRMConnector.connect"
+        )
         self.fake_connect_mock = self.fake_connect_patch.start()
 
-        self.fake_session_patch = patch("pyinfra_windows.connectors.winrm.WinRMConnector.session")
+        self.fake_session_patch = patch(
+            "pyinfra_windows.connectors.winrm.WinRMConnector.session"
+        )
         self.fake_session_mock = self.fake_session_patch.start()
 
     def tearDown(self):
@@ -29,7 +33,10 @@ class TestWinrmConnector(TestCase):
     def test_connect_all_password(self):
         inventory = make_inventory(
             hosts=(
-                ("@winrm/somehost", {"winrm_username": "testuser", "winrm_password": "testpass"}),
+                (
+                    "@winrm/somehost",
+                    {"winrm_username": "testuser", "winrm_password": "testpass"},
+                ),
                 (
                     "@winrm/anotherhost",
                     {"winrm_username": "testuser2", "winrm_password": "testpass2"},

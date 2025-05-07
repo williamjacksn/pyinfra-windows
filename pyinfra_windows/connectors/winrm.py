@@ -62,14 +62,15 @@ class DataKeys:
 
 # TODO not sure where this logic should live
 def _make_keys(keys_prefix, cls):
-        class Keys:
-            pass
+    class Keys:
+        pass
 
-        for key in cls.__dict__:
-            if not key.startswith("_"):
-                setattr(Keys, key, f"{keys_prefix}_{key}")
+    for key in cls.__dict__:
+        if not key.startswith("_"):
+            setattr(Keys, key, f"{keys_prefix}_{key}")
 
-        return Keys
+    return Keys
+
 
 DATA_KEYS = _make_keys("winrm", DataKeys)
 
@@ -116,7 +117,6 @@ def _make_winrm_kwargs(state, host):
 
 
 class WinRMConnector(BaseConnector):
-
     handles_execution = True
 
     session = None
@@ -181,7 +181,7 @@ class WinRMConnector(BaseConnector):
         success_exit_codes=None,
         print_output=False,
         print_input=False,
-        #return_combined_output=False, # TODO now always return combined
+        # return_combined_output=False, # TODO now always return combined
         shell_executable=None,
         **ignored_command_kwargs,
     ):
@@ -257,16 +257,22 @@ class WinRMConnector(BaseConnector):
         logger.debug("Command exit status: %s", status)
 
         combined_output = read_output_buffers(
-                std_out, std_err,
-                timeout=None, # TODO need to take timeout in
-                print_output=print_output,
-                print_prefix=self.host.print_prefix,)
+            std_out,
+            std_err,
+            timeout=None,  # TODO need to take timeout in
+            print_output=print_output,
+            print_prefix=self.host.print_prefix,
+        )
 
         return status, combined_output
 
-
     def get_file(
-        state, host, remote_filename, filename_or_io, remote_temp_filename=None, **command_kwargs
+        state,
+        host,
+        remote_filename,
+        filename_or_io,
+        remote_temp_filename=None,
+        **command_kwargs,
     ):
         raise PyinfraError("Not implemented")
 
