@@ -57,6 +57,7 @@ class DataKeys:
     transport = "WinRM transport (default: ``plaintext``)"
     read_timeout_sec = "Read timeout in seconds (default: ``30``)"
     operation_timeout_sec = "Operation timeout in seconds (default: ``20``)"
+    server_cert_validation = "Server certificate validation (default: ``validate``)"
 
 
 # TODO not sure where this logic should live
@@ -98,6 +99,10 @@ def _make_winrm_kwargs(state, host):
         (
             "winrm_operation_timeout_sec",
             host.data.get(DATA_KEYS.operation_timeout_sec, 20),
+        ),
+        (
+            "winrm_server_cert_validation",
+            host.data.get(DATA_KEYS.server_cert_validation, "validate"),
         ),
     ):
         if value:
