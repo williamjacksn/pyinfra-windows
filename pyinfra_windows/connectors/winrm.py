@@ -286,9 +286,11 @@ class WinRMConnector(BaseConnector):
                     "Set-Content" if i == 0 else "Add-Content",
                     remote_location,
                 )
-                status, _stdout, stderr = self.run_shell_command(ps)
+                status, output = self.run_shell_command(ps)
                 if status is False:
-                    logger.error("File upload error: {0}".format("\n".join(stderr)))
+                    logger.error(
+                        "File upload error: {0}".format("\n".join(output.stderr))
+                    )
                     return False
 
         return True
