@@ -199,7 +199,7 @@ def put(
         yield FileUploadCommand(
             local_file,
             dest,
-            remote_temp_filename=state.get_temp_filename(dest),
+            remote_temp_filename=host.get_temp_filename(dest),
         )
 
         # if user or group:
@@ -218,7 +218,7 @@ def put(
             yield FileUploadCommand(
                 local_file,
                 dest,
-                remote_temp_filename=state.get_temp_filename(dest),
+                remote_temp_filename=host.get_temp_filename(dest),
             )
 
             # if user or group:
