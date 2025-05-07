@@ -8,7 +8,7 @@ name = "pyinfra-windows"
 description = ""
 requires-python = ">=3.8"
 dependencies = [
-  "pyinfra==3.0.2"
+  "pyinfra>=3.0.2",
 ]
 
 [project.entry-points."pyinfra.connectors"]
