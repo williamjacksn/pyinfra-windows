@@ -321,7 +321,9 @@ class WinRMConnector(BaseConnector):
             return False
 
         # Execute run_shell_command w/sudo and/or su_user
-        command = f"Move-Item -Path {temp_file} -Destination {remote_filename!r} -Force"
+        command = (
+            f'Move-Item -Path "{temp_file}" -Destination "{remote_filename}" -Force'
+        )
         status, output = self.run_shell_command(
             command,
             print_output=print_output,
