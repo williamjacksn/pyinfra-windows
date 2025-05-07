@@ -321,13 +321,18 @@ class WinRMConnector(BaseConnector):
             return False
 
         # Execute run_shell_command w/sudo and/or su_user
-        command = "Move-Item -Path {0} -Destination {1} -Force".format(temp_file, remote_filename)
-        status, _, stderr = self.run_shell_command(
-            command, print_output=print_output, print_input=print_input, **command_kwargs
+        command = "Move-Item -Path {0} -Destination {1} -Force".format(
+            temp_file, remote_filename
+        )
+        status, output = self.run_shell_command(
+            command,
+            print_output=print_output,
+            print_input=print_input,
+            **command_kwargs,
         )
 
         if status is False:
-            logger.error("File upload error: {0}".format("\n".join(stderr)))
+            logger.error("File upload error: {0}".format("\n".join(output.stderr)))
             return False
 
         if print_output:
